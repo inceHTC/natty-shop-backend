@@ -2,7 +2,6 @@ import express from "express";
 import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
-
 import productsRouter from "./routes/products.js";
 import authRouter from "./routes/auth.js";
 import adminRouter from "./routes/admin.js";
@@ -12,33 +11,27 @@ import addressRouter from "./routes/addresses.js";
 import favoritesRouter from "./routes/favorites.js";
 import contactRouter from "./routes/contact.js";
 
+
+
+
+
 const app = express();
+const PORT = 5000;
 
-// 🔹 Render PORT
-const PORT = process.env.PORT || 5000;
-
-// 🔹 ES module __dirname
+// 🔹 ES module için __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// 🔹 CORS (Netlify + Local)
-app.use(
-  cors({
-    origin: [
-      "http://localhost:5173",
-      "https://natty-shop.netlify.app",
-    ],
-    credentials: true,
-  })
-);
-
+// middleware
+app.use(cors());
 app.use(express.json());
 
-// 🔹 Static files
-app.use("/images", express.static(path.join(__dirname, "public/images")));
-app.use("/videos", express.static(path.join(__dirname, "public/videos")));
+app.use("/images", express.static("public/images"));
+app.use("/videos", express.static("public/videos"));
 
-// 🔹 Routes
+
+
+// routes
 app.use("/products", productsRouter);
 app.use("/auth", authRouter);
 app.use("/admin", adminRouter);
@@ -48,11 +41,11 @@ app.use("/addresses", addressRouter);
 app.use("/favorites", favoritesRouter);
 app.use("/contact", contactRouter);
 
-// 🔹 Test
+// test route
 app.get("/", (req, res) => {
   res.send("Backend çalışıyor 🚀");
 });
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
 });
