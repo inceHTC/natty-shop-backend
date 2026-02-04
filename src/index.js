@@ -11,14 +11,10 @@ import addressRouter from "./routes/addresses.js";
 import favoritesRouter from "./routes/favorites.js";
 import contactRouter from "./routes/contact.js";
 
-
-
-
-
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
-// 🔹 ES module için __dirname
+// ES module için __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -28,8 +24,6 @@ app.use(express.json());
 
 app.use("/images", express.static("public/images"));
 app.use("/videos", express.static("public/videos"));
-
-
 
 // routes
 app.use("/products", productsRouter);
@@ -47,5 +41,5 @@ app.get("/", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
