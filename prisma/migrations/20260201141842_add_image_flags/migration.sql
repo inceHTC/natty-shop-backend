@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "ProductImage" ADD COLUMN     "isMain" BOOLEAN NOT NULL DEFAULT false,
+ADD COLUMN     "order" INTEGER NOT NULL DEFAULT 0;
