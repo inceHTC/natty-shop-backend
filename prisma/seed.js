@@ -4,19 +4,26 @@ import bcrypt from "bcryptjs";
 const prisma = new PrismaClient();
 
 async function main() {
-  const passwordHash = await bcrypt.hash("admin1453", 10);
+  const passwordHash = await bcrypt.hash("admin123", 10);
 
-  await prisma.user.create({
-    data: {
-      email: "admin@admin.com",
-      password: passwordHash,
-      role: "admin",
-      firstName: "Admin",
-      lastName: "User"
-    }
+  const existing = await prisma.user.findUnique({
+    where: { email: "admin@admin.com" }
   });
 
-  console.log("✅ Admin kullanıcı oluşturuldu");
+  if (!existing) {
+    await prisma.user.create({
+      data: {
+        email: "admin@admin.com",
+        password: passwordHash,
+        role: "admin",
+        firstName: "Admin",
+        lastName: "User"
+      }
+    });
+    console.log("✅ Admin kullanıcı oluşturuldu");
+  } else {
+    console.log("ℹ️ Admin zaten var, atlandı");
+  }
 }
 
 main()
