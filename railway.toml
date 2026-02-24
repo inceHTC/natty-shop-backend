@@ -1,0 +1,6 @@
+# Railway deploy ayarları
+# Build: prisma generate (package.json'daki "build" script)
+# Start: npm start (prisma migrate deploy + node src/index.js)
+
+[build]
+buildCommand = "npm install && npm run build"
