@@ -10,6 +10,14 @@ import profileRouter from "./routes/profile.js";
 import addressRouter from "./routes/addresses.js";
 import favoritesRouter from "./routes/favorites.js";
 import contactRouter from "./routes/contact.js";
+import dotenv from "dotenv";
+dotenv.config();
+
+if (!process.env.JWT_SECRET) {
+  throw new Error("JWT_SECRET tanımlı değil!");
+}
+
+console.log("JWT SECRET AKTİF:", !!process.env.JWT_SECRET);
 
 const app = express();
 const PORT = process.env.PORT || 5000;

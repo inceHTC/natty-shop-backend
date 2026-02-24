@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "type": "module",
 "scripts": {
-  "start": "npx prisma migrate deploy && node prisma/seed.js && node src/index.js"
+ "start": "npx prisma migrate deploy && node src/index.js"
+
 
 }
 
