@@ -1,17 +1,15 @@
 import multer from "multer";
 import path from "path";
 import fs from "fs";
+import { fileURLToPath } from "url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const projectRoot = path.join(__dirname, "..");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    // formdan gelen gender
     const gender = req.body.gender === "erkek" ? "erkek" : "kadin";
-
-    const uploadPath = path.join(
-      process.cwd(),
-      "public/images",
-      gender
-    );
+    const uploadPath = path.join(projectRoot, "public", "images", gender);
 
     // klasör yoksa oluştur
     if (!fs.existsSync(uploadPath)) {
